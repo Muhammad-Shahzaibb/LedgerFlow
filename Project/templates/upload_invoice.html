@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-center my-4">Upload Invoice</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.invoice_file.label(class="form-label") }}
+        {{ form.invoice_file(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Upload Invoice</button>
+</form>
+
+<!-- Show 'View Ledger' Button Only If Flash Message Exists -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="mt-4">
+            <a href="{{ url_for('ledger') }}" class="btn btn-success">View Ledger</a>
+        </div>
+    {% endif %}
+{% endwith %}
+
+{% endblock %}

@@ -1,0 +1,34 @@
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore logs and temporary files
+*.log
+*.sqlite3
+instance/
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Ignore compiled C extensions
+*.so
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore environment variables and credentials
+.env
+*.secret
+
+# Ignore dependency directories
+node_modules/

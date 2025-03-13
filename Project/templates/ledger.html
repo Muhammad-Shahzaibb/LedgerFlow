@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h2 class="mb-4">Ledger Entries</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Entry ID</th>
+                <th>Entry Date</th>
+                <th>Account Description</th>
+                <th>Debit</th>
+                <th>Credit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in ledger_entries %}
+            <tr>
+                <td>{{ entry.entry_id }}</td>
+                <td>{{ entry.entry_date }}</td>
+                <td>{{ entry.account_name }}</td>
+                <td>{{ entry.debit }}</td>
+                <td>{{ entry.credit }}</td>
+            </tr>
+
+            {% if loop.index is even %}
+            <!-- Add a bold horizontal line after every two entries -->
+            <tr>
+                <td colspan="5"><hr style="border-top: 3px solid black;"></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Generate Profit/Loss Insights Button -->
+    <div class="text-center mt-4">
+        <button class="btn btn-success" id="generatePLBtn">Generate Profit/Loss Statement</button>
+    </div>
+
+    <!-- Section to display financial insights -->
+    <div id="profitLossSection" class="mt-5 p-4 border rounded d-none" style="background-color: #f8f9fa; min-height: 150px;">
+        <h4>Profit & Loss Insights</h4>
+        <p id="profitLossContent">Fetching insights...</p>
+    </div>
+</div>
+
+<!-- JavaScript for AJAX Request -->
+<script>
+    document.getElementById("generatePLBtn").addEventListener("click", function() {
+        let section = document.getElementById("profitLossSection");
+        let content = document.getElementById("profitLossContent");
+
+        section.classList.remove("d-none");  // Show the section
+        section.scrollIntoView({ behavior: "smooth" });  // Scroll smoothly into view
+        content.innerHTML = "Fetching insights...";  // Show loading text
+
+        fetch("/financial_insights", { method: "POST" })
+            .then(response => response.json())
+            .then(data => {
+                content.innerHTML = `<p>${data.insight}</p>`;  // Update content
+            })
+            .catch(error => {
+                content.innerHTML = `<p class="text-danger">Error fetching insights.</p>`;
+                console.error("Error fetching insights:", error);
+            });
+    });
+</script>
+{% endblock %}
+
+{% block footer %}{% endblock %}

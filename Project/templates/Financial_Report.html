@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Financial Report</h2>
+
+    <form method="POST" action="/financial_insights">
+        <label for="query">Ask a financial question:</label>
+        <input type="text" name="query" class="form-control" placeholder="e.g. What was last month's profit?">
+        <button type="submit" class="btn btn-primary mt-2">Get Insights</button>
+    </form>
+
+    {% if insight %}
+    <div class="mt-4 alert alert-info">
+        <strong>AI Insight:</strong> {{ insight }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

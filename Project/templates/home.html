@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="display-4">Welcome to the LedgerFlow</h1>
+    <p class="lead">
+        LedgerFlow is an intuitive and efficient accounting ledger system designed to simplify financial tracking for businesses. With seamless ledger management, automated profit/loss insights, and a user-friendly interface, it ensures accurate record-keeping and financial transparency. Stay organized, make informed decisions, and streamline your accounting workflow effortlessly with LedgerFlow.
+    </p>
+    <div class="mt-4">
+        <a href="{{ url_for('login_page') }}" class="btn btn-primary btn-lg">Login</a>
+        <a href="{{ url_for('register_company') }}" class="btn btn-success btn-lg">Signup</a>
+    </div>
+</div>
+{% endblock %}
